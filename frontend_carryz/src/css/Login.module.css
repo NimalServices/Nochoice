@@ -1,0 +1,22 @@
+body {
+  background-image:linear-gradient(to bottom, #f0f0f0, #7fb0df);
+}
+
+h2 {
+  margin-top: 0px;
+  font-size: 80px;
+  text-align: center;          /* ensures text itself is centered */
+}
+
+.formLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  margin: 20px auto;
+}
+
+.formLogin input {
+  padding: 10px;
+  font-size: 16px;
+}
