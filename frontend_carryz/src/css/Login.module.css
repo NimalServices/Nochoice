@@ -1,4 +1,6 @@
 .loginBackground {
+  margin: 0;
+  height: 100vh;
   background-image:linear-gradient(to bottom, #f0f0f0, #7fb0df);
 }
 h5 {
