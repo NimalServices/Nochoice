@@ -1,40 +1,55 @@
-const mongoose = require("mongoose");
+const Carrier = require("../models/Carrier");
 
-const deliveryRecordSchema = new mongoose.Schema(
-  {
-    carrierId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Carrier",
-      required: true
-    },
-    fromWhere: {
-      type: String,
-      required: true
-    },
-    toWhere: {
-      type: String,
-      required: true
-    },
-    customerNo: {
-      type: String,
-      required: true
-    },
-    amount: {
-      type: Number,
-      required: true,
-      min: 0
-    },
-    dateTime: {
-      type: Date,
-      default: Date.now
-    },
-    status: {
-      type: String,
-      enum: ["pending", "accepted", "completed", "cancelled"],
-      default: "completed"
+exports.createCarrier = async (req, res) => {
+  try {
+    const carrier = await Carrier.create(req.body);
+    res.status(201).json(carrier);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getAllCarriers = async (req, res) => {
+  try {
+    const carriers = await Carrier.find().populate("userId", "username role");
+    res.json(carriers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getCarrierById = async (req, res) => {
+  try {
+    const carrier = await Carrier.findById(req.params.id).populate("userId", "username role");
+    if (!carrier) {
+      return res.status(404).json({ message: "Carrier not found" });
     }
-  },
-  { timestamps: true }
-);
+    res.json(carrier);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
-module.exports = mongoose.model("DeliveryRecord", deliveryRecordSchema);
+exports.updateCarrier = async (req, res) => {
+  try {
+    const carrier = await Carrier.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!carrier) {
+      return res.status(404).json({ message: "Carrier not found" });
+    }
+    res.json(carrier);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.deleteCarrier = async (req, res) => {
+  try {
+    const carrier = await Carrier.findByIdAndDelete(req.params.id);
+    if (!carrier) {
+      return res.status(404).json({ message: "Carrier not found" });
+    }
+    res.json({ message: "Carrier deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

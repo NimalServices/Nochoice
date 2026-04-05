@@ -1,40 +1,26 @@
 const mongoose = require("mongoose");
 
-const carrierSchema = new mongoose.Schema(
+const carrierTravelSchema = new mongoose.Schema(
   {
-    userId: {
+    carrierId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+      ref: "Carrier",
       required: true
     },
-    nic: {
-      type: String,
-      required: true,
-      unique: true
-    },
-    name: {
+    fromWhere: {
       type: String,
       required: true
     },
-    category: {
-      type: String,
-      enum: ["university_traveler", "usual_traveler"],
-      required: true
-    },
-    phone: {
+    toWhere: {
       type: String,
       required: true
     },
-    joinedDate: {
+    travelDate: {
       type: Date,
-      default: Date.now
-    },
-    approved: {
-      type: Boolean,
-      default: false
+      required: true
     }
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Carrier", carrierSchema);
+module.exports = mongoose.model("CarrierTravel", carrierTravelSchema);

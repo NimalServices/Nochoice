@@ -11,7 +11,7 @@ const {
 } = require("../controllers/carrierController");
 
 router.post("/", auth, role("admin"), createCarrier);
-router.get("/", auth, getAllCarriers);
+router.get("/", getAllCarriers);
 router.get("/:id", auth, getCarrierById);
 router.put("/:id", auth, role("admin"), updateCarrier);
 router.delete("/:id", auth, role("admin"), deleteCarrier);
