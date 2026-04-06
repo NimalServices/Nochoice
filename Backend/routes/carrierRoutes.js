@@ -7,11 +7,13 @@ const {
   getAllCarriers,
   getCarrierById,
   updateCarrier,
-  deleteCarrier
+  deleteCarrier,
+  registerCarrier
 } = require("../controllers/carrierController");
 
-router.post("/", auth, role("admin"), createCarrier);
-router.get("/", getAllCarriers);
+router.post("/", createCarrier);
+router.post("/register", registerCarrier);
+router.get("/", auth, getAllCarriers);
 router.get("/:id", auth, getCarrierById);
 router.put("/:id", auth, role("admin"), updateCarrier);
 router.delete("/:id", auth, role("admin"), deleteCarrier);
