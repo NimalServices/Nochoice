@@ -15,7 +15,9 @@ function App() {
     { path: "/",element:<HomePage/>},
     { path: "/carrier", element: <Carrier /> },
     { path: "/search-carrier", element: <SearchCarrier /> }
-  ]);
+  ],
+    { basename: "/Nochoice" } // ✅ Add this  
+);
 
 
   return (
