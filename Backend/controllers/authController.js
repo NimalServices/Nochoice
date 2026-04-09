@@ -80,3 +80,43 @@ exports.login = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+exports.loginCarrier = async (req, res) => {
+  try {
+    const { nic, password } = req.body;
+
+    // 1. Check carrier exists
+    const carrier = await Carrier.findOne({ nic });
+    if (!carrier) {
+      return res.status(400).json({ message: "Invalid NIC or password" });
+    }
+
+    // 2. Compare password
+    const isMatch = await bcrypt.compare(password, carrier.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid NIC or password" });
+    }
+
+    // 3. (Optional) Check approval
+    // if (!carrier.approved) {
+    //   return res.status(403).json({ message: "Carrier not approved yet" });
+    // }
+
+    // 4. Success response
+    res.json({
+      message: "Login successful",
+      carrier: {
+        id: carrier._id,
+        name: carrier.name,
+        nic: carrier.nic,
+        category: carrier.category,
+        phone: carrier.phone
+      }
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

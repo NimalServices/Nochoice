@@ -6,17 +6,17 @@ import axios from "axios";
 
 
 function Login() {
-  const [username,setUsername] =useState("");
+  const [nic,setNic] =useState("");
   const [password,setPassword] =useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/auth/login', {username, password }  )
+    axios.post('http://localhost:5000/api/auth/login', {nic, password }  )
       .then(result => {
         console.log(result)
         if(result.data.message === "Login successful"){
-          navigate('/home');
+          navigate('/careerhome');
       }    })
       .catch(err => {
         console.error(err);
@@ -30,9 +30,9 @@ function Login() {
         <form className={styles.formLogin} onSubmit={handleSubmit}>
             <input  
               type="text"
-              placeholder="userName" 
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="NIC Number" 
+              value={nic}
+              onChange={(e) => setNic(e.target.value)}
             />
             <input 
               type="password" 

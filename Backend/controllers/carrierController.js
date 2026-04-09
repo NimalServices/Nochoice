@@ -1,4 +1,5 @@
 const Carrier = require("../models/Carrier");
+const bcrypt = require("bcryptjs");
 
 exports.createCarrier = async (req, res) => {
   try {
@@ -51,5 +52,32 @@ exports.deleteCarrier = async (req, res) => {
     res.json({ message: "Carrier deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+
+
+exports.registerCarrier = async (req, res) => {
+  try {
+    const { name, nic, category, phone, password } = req.body;
+
+    // hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const carrier = new Carrier({
+      userId: req.user?.id || null, // optional if not using auth yet
+      name,
+      nic,
+      category,
+      phone,
+      password: hashedPassword
+    });
+
+    await carrier.save();
+
+    res.json({ message: "Carrier registered successfully" });
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 };
