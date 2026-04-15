@@ -6,11 +6,13 @@ const {
   getAllTravels,
   getTravelById,
   updateTravel,
-  deleteTravel
+  deleteTravel,
+  getTravels
 } = require("../controllers/carrierTravelController");
 
 router.post("/", auth, createTravel);
-router.get("/", auth, getAllTravels);
+// router.get("/", auth, getAllTravels);
+router.get("/", getTravels);
 router.get("/:id", auth, getTravelById);
 router.put("/:id", auth, updateTravel);
 router.delete("/:id", auth, deleteTravel);
