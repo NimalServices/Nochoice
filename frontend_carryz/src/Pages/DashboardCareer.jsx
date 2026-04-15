@@ -9,7 +9,7 @@ const API_URL = "http://localhost:5000/api/travels";
 function DashboardCareer() {
 
   const [carrierId, setCarrierId] = useState(null);
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 
 useEffect(() => {
   if (!token) return;
