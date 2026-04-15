@@ -40,7 +40,6 @@ function CarrierDetails({ carrier, goBack }) {
           <p><span>📅 Date:</span> {carrier.date}</p>
           <p><span>⏰ Call Time:</span> {carrier.time}</p>
           <p><span>📞 Contact:</span> {carrier.contact}</p>
-          <p><span>💰 Price:</span> {carrier.price}</p>
 
           {/* Handover Selection */}
           <div className="handover-box">

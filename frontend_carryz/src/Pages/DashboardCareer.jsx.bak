@@ -87,69 +87,10 @@ function DashboardCareer() {
     fetchTravels();
   };
 
+const DashboardCareer = () => {
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Travel Management</h2>
-
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <input
-          name="fromWhere"
-          placeholder="From"
-          value={form.fromWhere}
-          onChange={handleChange}
-          required
-        />
-        <input
-          name="toWhere"
-          placeholder="To"
-          value={form.toWhere}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="date"
-          name="travelDate"
-          value={form.travelDate}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={form.price}
-          onChange={handleChange}
-          required
-        />
-
-        <button type="submit" className={styles.submitBtn}>
-          {editId ? "Update Travel" : "Add Travel"}
-        </button>
-      </form>
-
-      <div className={styles.list}>
-        {travels.map((t) => (
-          <div key={t._id} className={styles.card}>
-            <p><strong>{t.fromWhere}</strong> ? {t.toWhere}</p>
-            <p>Date: {new Date(t.travelDate).toLocaleDateString()}</p>
-            <p>Price: Rs. {t.price}</p>
-
-            <div className={styles.actions}>
-              <button onClick={() => handleEdit(t)} className={styles.editBtn}>
-                Edit
-              </button>
-              <button
-                onClick={() => handleDelete(t._id)}
-                className={styles.deleteBtn}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+    <div>DashboardCareer</div>
+  )
 }
 
-export default DashboardCareer;
+export default DashboardCareer

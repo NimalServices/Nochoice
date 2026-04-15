@@ -15,7 +15,6 @@ function Login() {
     axios.post('http://localhost:5000/api/auth/login', {nic, password }  )
       .then(result => {
         console.log(result)
-        localStorage.setItem("token", result.data.token);
         if(result.data.message === "Login successful"){
           navigate('/careerhome');
       }    })

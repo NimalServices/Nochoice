@@ -1,86 +1,66 @@
+// SearchCarrier.jsx
+
 import React, { useState } from "react";
-import "../css/SearchCarrier.css";
+import { useNavigate } from "react-router-dom";
+import styles from "../css/SearchCarrier.module.css";
 
 function SearchCarrier() {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     from: "",
     to: "",
-    date: "",
-    size: ""
+    date: ""
   });
 
   const locations = ["Jaffna", "Colombo", "Kandy", "Galle"];
-  const sizes = ["Small", "Medium", "Large"];
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
- const handleSearch = () => {
-  if (!formData.from || !formData.to || !formData.date || !formData.size) {
-    alert("Please fill all fields!");
-    return;
-  }
+  const handleSearch = () => {
+    const { from, to, date } = formData;
 
-  if (formData.from === formData.to) {
-    alert("From and To locations cannot be the same!");
-    return;
-  }
+    if (!from || !to || !date) {
+      alert("Fill all fields!");
+      return;
+    }
 
-  alert("Searching carriers...");
-};
+    if (from === to) {
+      alert("Locations cannot be same!");
+      return;
+    }
+
+    navigate("/carriers", { state: formData });
+  };
 
   return (
-    <div className="search-page">
-      <div className="search-card">
+    <div className={styles.page}>
+      <div className={styles.card}>
         <h2>Search Carrier</h2>
 
-        {/* From */}
         <label>From</label>
         <select name="from" value={formData.from} onChange={handleChange}>
-          <option value="">Select location</option>
-          {locations.map((loc, index) => (
-            <option key={index} value={loc}>{loc}</option>
+          <option value="">Select</option>
+          {locations.map((loc, i) => (
+            <option key={i}>{loc}</option>
           ))}
         </select>
 
-        {/* To */}
-         <label>To</label>
-       <select name="to" value={formData.to} onChange={handleChange}>
-            <option value="">Select location</option>
-  {locations.map((loc, index) => (
-    <option
-      key={index}
-      value={loc}
-      disabled={formData.from === loc}  // 🚀 prevents same selection
-    >
-      {loc}
-             </option>
-  ))}
-        </select>
-
-        {/* Date */}
-        <label>Date of Travel</label>
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-        />
-
-        {/* Parcel Size */}
-        <label>Parcel Size</label>
-        <select name="size" value={formData.size} onChange={handleChange}>
-          <option value="">Select size</option>
-          {sizes.map((size, index) => (
-            <option key={index} value={size}>{size}</option>
+        <label>To</label>
+        <select name="to" value={formData.to} onChange={handleChange}>
+          <option value="">Select</option>
+          {locations.map((loc, i) => (
+            <option key={i} disabled={formData.from === loc}>
+              {loc}
+            </option>
           ))}
         </select>
 
-        {/* Search Button */}
+        <label>Date</label>
+        <input type="date" name="date" onChange={handleChange} />
+
         <button onClick={handleSearch}>Search</button>
       </div>
     </div>
