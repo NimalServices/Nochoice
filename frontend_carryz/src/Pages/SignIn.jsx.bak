@@ -25,7 +25,7 @@ function SignIn() {
     .then((res) => {
       console.log(res.data);
       alert("Carrier registered successfully!");
-      navigate("/careerhome");
+      navigate("/home");
     })
     .catch((err) => {
       console.error(err);

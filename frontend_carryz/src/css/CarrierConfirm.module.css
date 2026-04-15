@@ -1,0 +1,79 @@
+.container {
+  min-height: 100vh;
+  padding: 20px;
+  background-image: linear-gradient(to bottom, #f0f0f0, #7fb0df);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.route {
+  margin: 8px 0;
+  font-size: 15px;
+}
+
+.date {
+  font-size: 14px;
+  color: #555;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #28a745;
+  margin-top: 5px;
+}
+
+.button {
+  margin-top: 10px;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background: #0056b3;
+}
+
+/* ?? Mobile */
+@media (max-width: 600px) {
+  .card {
+    padding: 12px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+}
