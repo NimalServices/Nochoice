@@ -93,20 +93,19 @@ exports.loginCarrier = async (req, res) => {
       return res.status(400).json({ message: "Invalid NIC or password" });
     }
 
-    // 2. Compare password
+    // ⚠️ IMPORTANT: Make sure password exists in Carrier model
     const isMatch = await bcrypt.compare(password, carrier.password);
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid NIC or password" });
     }
 
-    // 3. (Optional) Check approval
-    // if (!carrier.approved) {
-    //   return res.status(403).json({ message: "Carrier not approved yet" });
-    // }
+    // 2. Generate token
+    const token = generateToken(carrier._id, "carrier");
 
-    // 4. Success response
+    // 3. Send response with token
     res.json({
       message: "Login successful",
+      token: token,
       carrier: {
         id: carrier._id,
         name: carrier.name,

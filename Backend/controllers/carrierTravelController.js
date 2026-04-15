@@ -53,3 +53,34 @@ exports.deleteTravel = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// controllers/travelController.js
+
+exports.getTravels = async (req, res) => {
+  try {
+    const { from, to, date } = req.query;
+
+    let filter = {};
+
+    if (from) filter.fromWhere = from;
+    if (to) filter.toWhere = to;
+
+    if (date) {
+      const selectedDate = new Date(date);
+
+      const nextDay = new Date(selectedDate);
+      nextDay.setDate(selectedDate.getDate() + 1);
+
+      filter.travelDate = {
+        $gte: selectedDate,
+        $lt: nextDay
+      };
+    }
+
+    const travels = await CarrierTravel.find(filter).populate("carrierId");
+
+    res.json(travels);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};  
