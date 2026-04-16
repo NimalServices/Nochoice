@@ -32,7 +32,8 @@ function SearchCarrier() {
       return;
     }
 
-    navigate("/carriers", { state: formData });
+    const query = new URLSearchParams({ from, to, date }).toString();
+    navigate(`/carriers?${query}`, { state: formData });
   };
 
   return (
@@ -59,7 +60,7 @@ function SearchCarrier() {
         </select>
 
         <label>Date</label>
-        <input type="date" name="date" onChange={handleChange} />
+        <input type="date" name="date" value={formData.date} onChange={handleChange} />
 
         <button onClick={handleSearch}>Search</button>
       </div>
