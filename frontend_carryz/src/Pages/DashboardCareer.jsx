@@ -12,7 +12,7 @@ const carrierId = decoded.id;
 function DashboardCareer() {
 
   const [carrierId, setCarrierId] = useState(null);
-// const token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 useEffect(() => {
   if (!token) return;
