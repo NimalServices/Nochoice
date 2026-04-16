@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "../css/DashboardCareer.module.css"; // ? module import
-// import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
-const API_URL = "http://localhost:5000/api/travels";
+const API_URL = `${import.meta.env.VITE_API_URL}/api/travels`;
 const token = localStorage.getItem("token");
 const decoded = jwtDecode(token);
 const carrierId = decoded.id;

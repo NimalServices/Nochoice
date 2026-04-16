@@ -15,7 +15,7 @@ function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:5000/api/carriers/register", {
+    axios.post(`${import.meta.env.VITE_API_URL}/api/carriers/register`, {
       name,
       nic,
       category,

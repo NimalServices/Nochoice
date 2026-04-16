@@ -12,7 +12,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:5000/api/auth/login', {nic, password }  )
+    axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, {nic, password }  )
       .then(result => {
         console.log(result)
         localStorage.setItem("token", result.data.token);
