@@ -8,7 +8,22 @@ const token = localStorage.getItem("token");
 const decoded = jwtDecode(token);
 const carrierId = decoded.id;
 
+
 function DashboardCareer() {
+
+  const [carrierId, setCarrierId] = useState(null);
+// const token = localStorage.getItem("token");
+
+useEffect(() => {
+  if (!token) return;
+
+  try {
+    const decoded = jwtDecode(token);
+    setCarrierId(decoded.id);
+  } catch (err) {
+    console.error("Invalid token");
+  }
+}, [token]);
   const [travels, setTravels] = useState([]);
   const [form, setForm] = useState({
     fromWhere: "",
