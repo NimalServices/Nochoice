@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import styles from "../css/DashboardCareer.module.css";
-import jwtDecode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api/travels`;
 
