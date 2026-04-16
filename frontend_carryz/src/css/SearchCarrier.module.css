@@ -25,6 +25,26 @@
   border: 1px solid #ccc;
 }
 
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.navLink {
+  padding: 8px 12px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
+.navLink:hover {
+  background: #0056b3;
+}
+
 .card button {
   padding: 10px;
   background: #007bff;

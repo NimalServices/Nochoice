@@ -1,7 +1,7 @@
 // SearchCarrier.jsx
 
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "../css/SearchCarrier.module.css";
 
 function SearchCarrier() {
@@ -39,6 +39,15 @@ function SearchCarrier() {
   return (
     <div className={styles.page}>
       <div className={styles.card}>
+        <div className={styles.nav}>
+          <Link className={styles.navLink} to="/login">
+            Login
+          </Link>
+          <Link className={styles.navLink} to="/signin">
+            Register
+          </Link>
+        </div>
+
         <h2>Search Carrier</h2>
 
         <label>From</label>

@@ -3,6 +3,7 @@ import styles from "../css/Login.module.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { buildApiUrl } from "../utils/api";
 
 
 function Login() {
@@ -12,7 +13,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, {nic, password }  )
+    axios.post(buildApiUrl("/api/auth/login"), { nic, password })
       .then(result => {
         console.log(result)
         localStorage.setItem("token", result.data.token);

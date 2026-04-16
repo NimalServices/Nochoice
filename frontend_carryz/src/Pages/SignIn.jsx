@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "../css/Login.module.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { buildApiUrl } from "../utils/api";
 
 function SignIn() {
   const [name, setName] = useState("");
@@ -15,7 +16,7 @@ function SignIn() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post(`${import.meta.env.VITE_API_URL}/api/carriers/register`, {
+    axios.post(buildApiUrl("/api/carriers/register"), {
       name,
       nic,
       category,

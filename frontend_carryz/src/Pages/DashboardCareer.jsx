@@ -1,9 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import styles from "../css/DashboardCareer.module.css";
+import { buildApiUrl } from "../utils/api";
 import { jwtDecode } from "jwt-decode";
 
-const API_URL = `${import.meta.env.VITE_API_URL}/api/travels`;
+const API_URL = buildApiUrl("/api/travels");
 
 function DashboardCareer() {
   const token = localStorage.getItem("token");

@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import styles from "../css/CarrierConfirm.module.css";
-
+import styles from "../css/CarrierConfirm.module.css";import { buildApiUrl } from "../utils/api";
 function CarrierConfirm() {
   const location = useLocation();
 
@@ -30,7 +29,7 @@ function CarrierConfirm() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/travels`, {
+        const res = await axios.get(buildApiUrl("/api/travels"), {
           params: searchData
         });
 
