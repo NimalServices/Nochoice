@@ -1,29 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
-import styles from "../css/DashboardCareer.module.css"; // ? module import
-import { jwtDecode } from "jwt-decode";
+import styles from "../css/DashboardCareer.module.css";
+import jwtDecode from "jwt-decode";
 
 const API_URL = `${import.meta.env.VITE_API_URL}/api/travels`;
-const token = localStorage.getItem("token");
-const decoded = jwtDecode(token);
-const carrierId = decoded.id;
-
 
 function DashboardCareer() {
+  const token = localStorage.getItem("token");
+  const carrierId = useMemo(() => {
+    if (!token) return null;
 
-  const [carrierId, setCarrierId] = useState(null);
-const token = localStorage.getItem("token");
+    try {
+      return jwtDecode(token).id;
+    } catch (error) {
+      console.error("Invalid token", error);
+      return null;
+    }
+  }, [token]);
 
-useEffect(() => {
-  if (!token) return;
-
-  try {
-    const decoded = jwtDecode(token);
-    setCarrierId(decoded.id);
-  } catch (err) {
-    console.error("Invalid token");
-  }
-}, [token]);
   const [travels, setTravels] = useState([]);
   const [form, setForm] = useState({
     fromWhere: "",
@@ -34,8 +28,6 @@ useEffect(() => {
 
   const [editId, setEditId] = useState(null);
 
-  const token = localStorage.getItem("token");
-
   // Fetch travels
   const fetchTravels = async () => {
     try {
@@ -43,14 +35,25 @@ useEffect(() => {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTravels(res.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchTravels();
-  }, []);
+    const loadTravels = async () => {
+      try {
+        const res = await axios.get(API_URL, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        setTravels(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    loadTravels();
+  }, [token]);
 
   // Handle input
   const handleChange = (e) => {
