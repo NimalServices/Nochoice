@@ -87,9 +87,12 @@ function CarrierConfirm() {
             <div className={styles.price}>
               💰 Rs. {c.price}
             </div>
-            <button className={styles.button}>
+            <div className={styles.contact}>
+              📞 {c.carrierId?.phone || "N/A"}
+            </div>
+            {/* <button className={styles.button}>
               View Details
-            </button>
+            </button> */}
           </div>
         ))
       )}
