@@ -37,6 +37,7 @@ exports.register = async (req, res) => {
         name,
         category,
         phone,
+        password: hashedPassword,
         approved: false
       });
     }
