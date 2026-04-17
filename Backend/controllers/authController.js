@@ -55,68 +55,64 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
-    const { username, password } = req.body;
+    const { username, nic, password } = req.body;
 
-    const user = await User.findOne({ username });
-    if (!user) {
-      return res.status(400).json({ message: "Invalid username or password" });
+    if (!password) {
+      return res.status(400).json({ message: "Password is required" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid username or password" });
-    }
-
-    res.json({
-      message: "Login successful",
-      token: generateToken(user._id, user.role),
-      user: {
-        id: user._id,
-        nic: user.nic,
-        username: user.username,
-        role: user.role
+    if (nic) {
+      const carrier = await Carrier.findOne({ nic });
+      if (!carrier || !carrier.password) {
+        return res.status(400).json({ message: "Invalid NIC or password" });
       }
-    });
+
+      const isMatch = await bcrypt.compare(password, carrier.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Invalid NIC or password" });
+      }
+
+      const token = generateToken(carrier._id, "carrier");
+      return res.json({
+        message: "Login successful",
+        token,
+        carrier: {
+          id: carrier._id,
+          name: carrier.name,
+          nic: carrier.nic,
+          category: carrier.category,
+          phone: carrier.phone
+        }
+      });
+    }
+
+    if (username) {
+      const user = await User.findOne({ username });
+      if (!user) {
+        return res.status(400).json({ message: "Invalid username or password" });
+      }
+
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) {
+        return res.status(400).json({ message: "Invalid username or password" });
+      }
+
+      return res.json({
+        message: "Login successful",
+        token: generateToken(user._id, user.role),
+        user: {
+          id: user._id,
+          nic: user.nic,
+          username: user.username,
+          role: user.role
+        }
+      });
+    }
+
+    return res.status(400).json({ message: "Username or NIC is required" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-
-
-exports.loginCarrier = async (req, res) => {
-  try {
-    const { nic, password } = req.body;
-
-    // 1. Check carrier exists
-    const carrier = await Carrier.findOne({ nic });
-    if (!carrier) {
-      return res.status(400).json({ message: "Invalid NIC or password" });
-    }
-
-    // ⚠️ IMPORTANT: Make sure password exists in Carrier model
-    const isMatch = await bcrypt.compare(password, carrier.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid NIC or password" });
-    }
-
-    // 2. Generate token
-    const token = generateToken(carrier._id, "carrier");
-
-    // 3. Send response with token
-    res.json({
-      message: "Login successful",
-      token: token,
-      carrier: {
-        id: carrier._id,
-        name: carrier.name,
-        nic: carrier.nic,
-        category: carrier.category,
-        phone: carrier.phone
-      }
-    });
-
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+exports.loginCarrier = exports.login;
