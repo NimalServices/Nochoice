@@ -4,6 +4,12 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 
 dotenv.config();
+
+if (!process.env.JWT_SECRET) {
+  console.error("Environment error: JWT_SECRET is required.");
+  process.exit(1);
+}
+
 connectDB();
 
 const app = express();
