@@ -90,6 +90,9 @@ function CarrierConfirm() {
             <div className={styles.contact}>
               📞 {c.carrierId?.phone || "N/A"}
             </div>
+            <div className={styles.contact}>
+              🕒 Bus Time @ {c.BusTime || "N/A"}
+            </div>
             {/* <button className={styles.button}>
               View Details
             </button> */}

@@ -24,7 +24,8 @@ function DashboardCareer() {
     fromWhere: "",
     toWhere: "",
     travelDate: "",
-    price: ""
+    price: "",
+    BusTime: ""
   });
 
   const [editId, setEditId] = useState(null);
@@ -80,7 +81,7 @@ function DashboardCareer() {
         });
       }
 
-      setForm({ fromWhere: "", toWhere: "", travelDate: "", price: "" });
+      setForm({ fromWhere: "", toWhere: "", travelDate: "", price: "", BusTime: "" });
       fetchTravels();
     } catch (err) {
       console.log(err);
@@ -93,7 +94,8 @@ function DashboardCareer() {
       fromWhere: travel.fromWhere,
       toWhere: travel.toWhere,
       travelDate: travel.travelDate.split("T")[0],
-      price: travel.price
+      price: travel.price,
+      BusTime: travel.BusTime || ""
     });
     setEditId(travel._id);
   };
@@ -140,6 +142,14 @@ function DashboardCareer() {
           onChange={handleChange}
           required
         />
+        <input
+          type="text"
+          name="BusTime"
+          placeholder="Bus Time"
+          value={form.BusTime}
+          onChange={handleChange}
+        />
+
 
         <button type="submit" className={styles.submitBtn}>
           {editId ? "Update Travel" : "Add Travel"}
