@@ -38,6 +38,7 @@ function SearchCarrier() {
 
   return (
     <div className={styles.page}>
+      <div className={styles.phone}>+94 775 320 757</div>
       <div className={styles.card}>
         <div className={styles.nav}>
           <Link className={styles.navLink} to="/login">

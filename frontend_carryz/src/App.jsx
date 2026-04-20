@@ -7,6 +7,7 @@ import HomePage from "./Pages/HomePage";
 import Carrier from "./Pages/Carrier"
 import SearchCarrier from "./Pages/SearchCarrier";
 import CarrierConfirm from "./Pages/CarrierConfirm";
+import Notfound from "./Pages/NotFound";
 
 function App() {
   const router = createBrowserRouter([
@@ -16,7 +17,8 @@ function App() {
     // { path: "/",element:<HomePage/>},
     // { path: "/carriers", element: <Carrier /> },
     { path: "/carriers", element: <CarrierConfirm /> },
-    { path: "/", element: <SearchCarrier /> }
+    { path: "/", element: <SearchCarrier /> , errorElement: <Notfound />}
+    
   ]);
 
 
