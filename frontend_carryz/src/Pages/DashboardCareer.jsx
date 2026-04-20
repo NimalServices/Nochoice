@@ -145,7 +145,7 @@ function DashboardCareer() {
         <input
           type="text"
           name="BusTime"
-          placeholder="Bus Time"
+          placeholder="Bus Time 09:00"
           value={form.BusTime}
           onChange={handleChange}
         />
@@ -162,6 +162,7 @@ function DashboardCareer() {
             <p><strong>{t.fromWhere}</strong> ? {t.toWhere}</p>
             <p>Date: {new Date(t.travelDate).toLocaleDateString()}</p>
             <p>Price: Rs. {t.price}</p>
+            <p>Bus Time: {t.BusTime || "N/A"}</p>
 
             <div className={styles.actions}>
               <button onClick={() => handleEdit(t)} className={styles.editBtn}>

@@ -22,6 +22,10 @@ const carrierTravelSchema = new mongoose.Schema(
     price: {
       type: Number,
       required: true
+    },
+    BusTime:{
+      type:String,
+      required:true
     }
   },
   { timestamps: true }
