@@ -36,7 +36,7 @@ function DashboardCareer() {
       const res = await axios.get(API_URL, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setTravels(res.data);
+      setTravels(res.data.filter((t) => t.carrierId === carrierId));
     } catch (error) {
       console.log(error);
     }
