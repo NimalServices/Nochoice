@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../css/SearchCarrier.module.css";
+import logo from "../assets/logo_Carryz.png";
 
 function SearchCarrier() {
   const navigate = useNavigate();
@@ -49,7 +50,10 @@ function SearchCarrier() {
           </Link>
         </div>
 
-        <h2>Search Carrier</h2>
+        {/* <h2>Search Carrier</h2> */}
+        <div>
+          <img src={logo} alt="Carryz Logo" className={styles.logo} />
+        </div>
 
         <label>From</label>
         <select name="from" value={formData.from} onChange={handleChange}>
