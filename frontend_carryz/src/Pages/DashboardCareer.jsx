@@ -3,10 +3,12 @@ import axios from "axios";
 import styles from "../css/DashboardCareer.module.css";
 import { buildApiUrl } from "../utils/api";
 import { jwtDecode } from "jwt-decode";
+import loadingGif from "../assets/Loading.gif";
 
 const API_URL = buildApiUrl("/api/travels");
 
 function DashboardCareer() {
+  const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
   const carrier = JSON.parse(localStorage.getItem("carrier") || "{}");
 

@@ -1,7 +1,10 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
-import styles from "../css/CarrierConfirm.module.css";import { buildApiUrl } from "../utils/api";
+import styles from "../css/CarrierConfirm.module.css";
+import { buildApiUrl } from "../utils/api";
+import loadingGif from "../assets/Loading.gif";
+
 function CarrierConfirm() {
   const location = useLocation();
 
@@ -47,8 +50,17 @@ function CarrierConfirm() {
   }, [searchData]);
 
   // ✅ Loading state
-  if (loading) return <p>Loading carriers...</p>;
-
+  if (loading)
+  return (
+    <div className={styles.loadingContainer}>
+      <img
+        src={loadingGif}
+        alt="Loading"
+        className={styles.loader}
+      />
+      <p>Loading carriers...</p>
+    </div>
+  );
   // ✅ Error state
   if (error) return <p>{error}</p>;
 
