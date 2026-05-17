@@ -15,8 +15,12 @@ function Login() {
     e.preventDefault();
     axios.post(buildApiUrl("/api/auth/login"), { nic, password })
       .then(result => {
-        console.log(result)
+        // console.log(result)
         localStorage.setItem("token", result.data.token);
+        localStorage.setItem(
+          "carrier",
+          JSON.stringify(result.data.carrier)
+        );
         if(result.data.message === "Login successful"){
           navigate('/careerhome');
       }    })

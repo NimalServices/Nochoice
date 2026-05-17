@@ -12,7 +12,7 @@ const {
 
 router.post("/", auth, createTravel);
 // router.get("/", auth, getAllTravels);
-router.get("/", getTravels);
+router.get("/",auth, getTravels);
 router.get("/:id", auth, getTravelById);
 router.put("/:id", auth, updateTravel);
 router.delete("/:id", auth, deleteTravel);

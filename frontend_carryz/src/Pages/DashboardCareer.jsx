@@ -8,6 +8,9 @@ const API_URL = buildApiUrl("/api/travels");
 
 function DashboardCareer() {
   const token = localStorage.getItem("token");
+  const carrier = JSON.parse(localStorage.getItem("carrier") || "{}");
+
+
   const carrierId = useMemo(() => {
     if (!token) return null;
 
@@ -36,7 +39,7 @@ function DashboardCareer() {
       const res = await axios.get(API_URL, {
         headers: { Authorization: `Bearer ${token}` }
       });
-      setTravels(res.data.filter((t) => t.carrierId === carrierId));
+      setTravels(res.data.filter((t) => t.carrierId?.nic === carrier.nic));
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +51,7 @@ function DashboardCareer() {
         const res = await axios.get(API_URL, {
           headers: { Authorization: `Bearer ${token}` }
         });
-        setTravels(res.data);
+        setTravels(res.data.filter((t) => t.carrierId?.nic === carrier.nic));
       } catch (error) {
         console.log(error);
       }
@@ -159,12 +162,12 @@ function DashboardCareer() {
       <div className={styles.list}>
         {travels.map((t) => (
           <div key={t._id} className={styles.card}>
-            <p><strong>{t.fromWhere}</strong> ? {t.toWhere}</p>
+            <p><strong>{t.fromWhere}</strong> to {t.toWhere}</p>
             <p>Date: {new Date(t.travelDate).toLocaleDateString()}</p>
             <p>Price: Rs. {t.price}</p>
             <p>Bus Time: {t.BusTime || "N/A"}</p>
 
-            <div className={styles.actions}>
+            {/* <div className={styles.actions}>
               <button onClick={() => handleEdit(t)} className={styles.editBtn}>
                 Edit
               </button>
@@ -174,7 +177,7 @@ function DashboardCareer() {
               >
                 Delete
               </button>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
