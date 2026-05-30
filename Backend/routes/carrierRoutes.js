@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const auth = require("../middleware/authMiddleware");
-const role = require("../middleware/roleMiddleware");
+const { verifyToken, authorizeRoles } = require("../middleware/authMiddleware"); // ← one import now
 const {
   createCarrier,
   getAllCarriers,
@@ -13,9 +12,9 @@ const {
 
 router.post("/", createCarrier);
 router.post("/register", registerCarrier);
-router.get("/", auth, getAllCarriers);
-router.get("/:id", auth, getCarrierById);
-router.put("/:id", auth, role("admin"), updateCarrier);
-router.delete("/:id", auth, role("admin"), deleteCarrier);
+router.get("/", verifyToken, getAllCarriers);
+router.get("/:id", verifyToken, getCarrierById);
+router.put("/:id", verifyToken, authorizeRoles("admin"), updateCarrier);
+router.delete("/:id", verifyToken, authorizeRoles("admin"), deleteCarrier);
 
 module.exports = router;

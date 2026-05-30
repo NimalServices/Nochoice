@@ -86,7 +86,8 @@ exports.login = async (req, res) => {
           name: carrier.name,
           nic: carrier.nic,
           category: carrier.category,
-          phone: carrier.phone
+          phone: carrier.phone,
+          approved: carrier.approved
         }
       });
     }
