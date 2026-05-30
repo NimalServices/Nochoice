@@ -1,0 +1,4 @@
+Options -MultiViews        → stops Apache from guessing URLs
+RewriteEngine On           → enables URL rewriting
+RewriteCond %{REQUEST_FILENAME} !-f   → if file doesn't exist
+RewriteRule ^ index.html [QL]         → serve index.html instead
