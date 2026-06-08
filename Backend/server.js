@@ -16,7 +16,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "*",
+  origin: "https://carryz.online",
 }));
 app.use(express.json());
 
