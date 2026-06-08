@@ -17,6 +17,7 @@ const app = express();
 
 app.use(cors({
   origin: "https://carryz.online",
+  credentials: true
 }));
 app.use(express.json());
 
