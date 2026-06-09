@@ -6,6 +6,8 @@ dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const connectDB = async () => {
   try {
+    console.log("MONGO_URI:", process.env.MONGO_URI ? "FOUND" : "NOT FOUND");
+    console.log("JWT_SECRET:", process.env.JWT_SECRET ? "FOUND" : "NOT FOUND");
     await mongoose.connect(process.env.MONGO_URI);
     console.log("MONGO_URI:", process.env.MONGO_URI ? "FOUND" : "NOT FOUND");
     console.log("JWT_SECRET:", process.env.JWT_SECRET ? "FOUND" : "NOT FOUND");
