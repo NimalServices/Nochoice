@@ -6,6 +6,11 @@ const connectDB = require("./config/db");
 
 dotenv.config();
 
+const path = require("path");
+
+console.log("Current directory:", process.cwd());
+console.log("Env path:", path.resolve(".env"));
+
 if (!process.env.JWT_SECRET) {
   console.error("Environment error: JWT_SECRET is required.");
   process.exit(1);
