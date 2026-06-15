@@ -8,9 +8,6 @@ dotenv.config();
 
 const path = require("path");
 
-console.log("Current directory:", process.cwd());
-console.log("Env path:", path.resolve(".env"));
-
 if (!process.env.JWT_SECRET) {
   console.error("Environment error: JWT_SECRET is required.");
   process.exit(1);
@@ -21,7 +18,7 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: "https://carryz.online",
+  origin: ["https://carryz.online", "http://localhost:5173"],
   credentials: true
 }));
 app.use(express.json());

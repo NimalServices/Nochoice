@@ -35,6 +35,9 @@ const carrierSchema = new mongoose.Schema(
     approved: {
       type: Boolean,
       default: false
+    },
+    referralCode: {
+      type: String,
     }
   },
   { timestamps: true }

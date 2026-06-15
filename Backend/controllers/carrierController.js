@@ -70,7 +70,8 @@ exports.registerCarrier = async (req, res) => {
       nic,
       category,
       phone,
-      password: hashedPassword
+      password: hashedPassword,
+      referralCode: req.body.referralCode || null
     });
 
     await carrier.save();
