@@ -59,7 +59,7 @@ exports.deleteCarrier = async (req, res) => {
 
 exports.registerCarrier = async (req, res) => {
   try {
-    const { name, nic, category, phone, password } = req.body;
+    const { name,email, nic, category, phone, password } = req.body;
 
     // hash password
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -67,6 +67,7 @@ exports.registerCarrier = async (req, res) => {
     const carrier = new Carrier({
       userId: req.user?.id || null, // optional if not using auth yet
       name,
+      email,
       nic,
       category,
       phone,
