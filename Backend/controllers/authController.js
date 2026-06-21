@@ -14,7 +14,7 @@ const generateToken = (id, role) => {
 
 exports.register = async (req, res) => {
   try {
-    const { nic, username, password, role, name, category, phone } = req.body;
+    const { nic, username, password, name, category, phone } = req.body;
 
     const existingUser = await User.findOne({
       $or: [{ nic }, { username }]
@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
       nic,
       username,
       password: hashedPassword,
-      role
+      role: "carrier",
     });
 
     let carrierProfile = null;
