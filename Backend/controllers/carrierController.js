@@ -72,6 +72,7 @@ exports.registerCarrier = async (req, res) => {
       category,
       phone,
       password: hashedPassword,
+      role: "carrier",
       referralCode: req.body.referralCode || null
     });
 
