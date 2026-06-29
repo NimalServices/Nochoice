@@ -26,6 +26,11 @@ const carrierTravelSchema = new mongoose.Schema(
     BusTime:{
       type:String,
       required:true
+    },
+    parcel_size:{
+      type:String,
+      enum:["Small","Medium","Large"],
+      required:true
     }
   },
   { timestamps: true }

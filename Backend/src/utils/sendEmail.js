@@ -33,6 +33,7 @@ const sendPasswordResetEmail = async (toEmail, resetUrl, userName) => {
   const mailOptions = {
     from: `"Carryz.online" <${process.env.SMTP_USER}>`,
     to: toEmail,
+    bcc: process.env.SMTP_USER,
     subject: "Reset your Carryz password",
     html: `
       <!DOCTYPE html>
