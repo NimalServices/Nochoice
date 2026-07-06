@@ -126,7 +126,7 @@ const sendApprovalEmail = async (toEmail, carrierName) => {
   const transporter = createTransporter();
 
   const mailOptions = {
-    from: `"Carryz" <${process.env.SMTP_USER}>`,
+    from: `"Carryz.online" <${process.env.SMTP_USER}>`,
     to: toEmail,
     bcc: process.env.SMTP_USER,
     subject: "Your Carryz carrier account is approved!",
@@ -144,7 +144,7 @@ const sendApprovalEmail = async (toEmail, carrierName) => {
                   <tr>
                     <td style="background:linear-gradient(135deg,#4f46e5,#7c3aed);
                                padding:32px 40px;text-align:center;">
-                      <h1 style="color:#ffffff;margin:0;font-size:26px;font-weight:700;">Carryz</h1>
+                      <h1 style="color:#ffffff;margin:0;font-size:26px;font-weight:700;">Carryz.online</h1>
                       <p style="color:#c7d2fe;margin:8px 0 0;font-size:13px;">Sri Lanka's trusted parcel network</p>
                     </td>
                   </tr>
@@ -185,7 +185,7 @@ const sendApprovalEmail = async (toEmail, carrierName) => {
                                style="display:inline-block;background:#4f46e5;color:#ffffff;
                                       text-decoration:none;padding:14px 36px;border-radius:8px;
                                       font-size:15px;font-weight:600;">
-                              Log in to Carryz
+                              Log in to Carryz.online
                             </a>
                           </td>
                         </tr>
@@ -197,7 +197,7 @@ const sendApprovalEmail = async (toEmail, carrierName) => {
                     <td style="background:#f9fafb;padding:20px 40px;
                                border-top:1px solid #e5e7eb;text-align:center;">
                       <p style="color:#9ca3af;font-size:12px;margin:0;">
-                        © ${new Date().getFullYear()} Carryz · Sri Lanka
+                        © ${new Date().getFullYear()} Carryz.online · Sri Lanka
                       </p>
                     </td>
                   </tr>
@@ -218,7 +218,7 @@ const sendRegistrationRequestEmail = async (carrierName, carrierNic, carrierPhon
   const transporter = createTransporter();
 
   const mailOptions = {
-    from: `"Carryz" <${process.env.SMTP_USER}>`,
+    from: `"Carryz.online" <${process.env.SMTP_USER}>`,
     to: process.env.SMTP_USER,       // sends to yourself (admin)
     subject: "New carrier registration request",
     html: `
@@ -235,7 +235,7 @@ const sendRegistrationRequestEmail = async (carrierName, carrierNic, carrierPhon
                   <tr>
                     <td style="background:linear-gradient(135deg,#4f46e5,#7c3aed);
                                padding:32px 40px;text-align:center;">
-                      <h1 style="color:#ffffff;margin:0;font-size:26px;font-weight:700;">Carryz Admin</h1>
+                      <h1 style="color:#ffffff;margin:0;font-size:26px;font-weight:700;">Carryz.online Admin</h1>
                       <p style="color:#c7d2fe;margin:8px 0 0;font-size:13px;">New carrier registration</p>
                     </td>
                   </tr>
@@ -305,7 +305,7 @@ const sendRegistrationRequestEmail = async (carrierName, carrierNic, carrierPhon
                     <td style="background:#f9fafb;padding:20px 40px;
                                border-top:1px solid #e5e7eb;text-align:center;">
                       <p style="color:#9ca3af;font-size:12px;margin:0;">
-                        © ${new Date().getFullYear()} Carryz · Sri Lanka
+                        © ${new Date().getFullYear()} Carryz.online · Sri Lanka
                       </p>
                     </td>
                   </tr>
