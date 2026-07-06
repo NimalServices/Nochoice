@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const crypto = require("crypto");
-const { sendPasswordResetEmail } = require("../src/utils/sendEmail");
+const { sendPasswordResetEmail, sendRegistrationRequestEmail } = require("../src/utils/sendEmail");
 
 const generateToken = (id, role) => {
   const secret = process.env.JWT_SECRET;
@@ -48,6 +48,12 @@ const register = async (req, res) => {
         password: hashedPassword,
         approved: false
       });
+    }
+
+    try{
+      await sendRegistrationRequestEmail(name,nic,phone,category);
+    } catch (emailErr) {
+      console.error("Error sending registration request email:", emailErr.message);
     }
 
     res.status(201).json({

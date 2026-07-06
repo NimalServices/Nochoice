@@ -1,6 +1,7 @@
 const Carrier = require("../models/Carrier");
 const CarrierTravel = require("../models/CarrierTravel");
 const User = require("../models/User");
+const { sendApprovalEmail } = require("../src/utils/sendEmail");
 
 // Get all carriers (pending approval - approved: false)
 exports.getPendingCarriers = async (req, res) => {
@@ -31,6 +32,14 @@ exports.approveCarrier = async (req, res) => {
       { new: true }
     );
     if (!carrier) return res.status(404).json({ message: "Carrier not found" });
+
+    if (carrier.email) {
+      try {
+        await sendApprovalEmail(carrier.email, carrier.name);
+      } catch (emailErr) {
+        console.error("Error sending approval email:", emailErr.message);
+      }
+    }
     res.json({ message: "Carrier approved", carrier });
   } catch (error) {
     res.status(500).json({ message: error.message });
