@@ -1,5 +1,7 @@
 const Carrier = require("../models/Carrier");
 const bcrypt = require("bcryptjs");
+const {sendRegistrationRequestEmail} = require("../src/utils/sendEmail");
+
 
 exports.createCarrier = async (req, res) => {
   try {
@@ -77,6 +79,18 @@ exports.registerCarrier = async (req, res) => {
     });
 
     await carrier.save();
+
+    try {
+      await sendRegistrationRequestEmail(
+        carrier.name,
+        carrier.nic,
+        carrier.phone,
+        carrier.category
+      );
+      console.log("Registration request email sent to admin");
+    } catch (emailErr) {
+      console.error("Registration email failed:", emailErr.message);
+    }
 
     res.json({ message: "Carrier registered successfully" });
 
