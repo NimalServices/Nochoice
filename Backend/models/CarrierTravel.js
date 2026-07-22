@@ -29,7 +29,7 @@ const carrierTravelSchema = new mongoose.Schema(
     },
     parcel_size:{
       type:String,
-      enum:["Small","Medium","Large"],
+      enum:["Small","Medium","Large","Passenger also can Travel"],
       default:"Small",
       required:true
     }
